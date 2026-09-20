@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard | Amar Computer</title>
+<style>
+body{font-family:Arial;background:#f3f6fa;margin:0;color:#123}.head{background:#06284b;color:#fff;padding:20px 6%;font-size:24px;font-weight:bold}.wrap{max-width:850px;margin:30px auto;padding:0 15px}.card{background:#fff;padding:22px;border-radius:12px;margin-bottom:18px;box-shadow:0 3px 14px #0001}.card h2{margin-top:0;color:#0866d8}label{display:block;font-weight:bold;margin:12px 0 6px}input,textarea{width:100%;padding:12px;border:1px solid #ccd5df;border-radius:8px;font-size:16px}textarea{min-height:90px}button{background:#16a85b;color:#fff;border:0;border-radius:8px;padding:13px 22px;font-weight:bold;font-size:16px;cursor:pointer}.note{background:#fff8d9;padding:14px;border-radius:8px;margin-bottom:20px}.link{display:inline-block;margin-left:10px;color:#0866d8}
+</style>
+</head>
+<body>
+<div class="head">⚙️ Amar Computer & Mobile Center — Admin Dashboard</div>
+<div class="wrap">
+<div class="note">यह fast demo dashboard offers को इस browser में save करता है। Public GitHub website के सभी visitors के लिए offer बदलने हेतु बाद में GitHub/Firebase backend जोड़ना होगा।</div>
+
+<div class="card"><h2>🔴 VI MNP Offer</h2><label>Offer Title</label><input id="viTitle"><label>Offer Details</label><textarea id="viText"></textarea></div>
+<div class="card"><h2>🔵 BSNL MNP Offer</h2><label>Offer Title</label><input id="bsnlTitle"><label>Offer Details</label><textarea id="bsnlText"></textarea></div>
+<div class="card"><h2>📱 Recharge Offer</h2><label>Offer Title</label><input id="rechargeTitle"><label>Offer Details</label><textarea id="rechargeText"></textarea></div>
+
+<button onclick="save()">💾 Save Offers</button>
+<a class="link" href="index.html">🌐 Website देखें</a>
+<p id="msg"></p>
+</div>
+<script>
+const defaults={
+vi:{title:"VI MNP Offer",text:"अपना नंबर VI में पोर्ट कराएं और उपलब्ध MNP ऑफर का लाभ उठाएं।"},
+bsnl:{title:"BSNL MNP Special Offer",text:"किसी भी नंबर को BSNL में पोर्ट कराने के लिए हमसे संपर्क करें।"},
+recharge:{title:"Mobile Recharge",text:"Jio, Airtel, VI और BSNL सहित विभिन्न कंपनियों के रिचार्ज।"}
+};
+const d=JSON.parse(localStorage.getItem("amarOffers")||"null")||defaults;
+["vi","bsnl","recharge"].forEach(k=>{document.getElementById(k+"Title").value=d[k].title;document.getElementById(k+"Text").value=d[k].text});
+function save(){
+ const o={};
+ ["vi","bsnl","recharge"].forEach(k=>o[k]={title:document.getElementById(k+"Title").value,text:document.getElementById(k+"Text").value});
+ localStorage.setItem("amarOffers",JSON.stringify(o));
+ document.getElementById("msg").textContent="✅ Offers save हो गए। अब Website देखें पर नया offer दिखेगा।";
+}
+</script>
+</body>
+</html>
